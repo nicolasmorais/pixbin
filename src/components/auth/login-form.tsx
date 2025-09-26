@@ -2,6 +2,7 @@
 
 import { useActionState, useEffect } from 'react';
 import { useFormStatus } from 'react-dom';
+import { useRouter } from 'next/navigation';
 import { login } from '@/app/login/actions';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -17,10 +18,14 @@ function SubmitButton() {
 }
 
 export function LoginForm() {
-  const [state, formAction] = useActionState(login, undefined);
+  const [state, formAction] = useActionState(login, { message: null, success: false });
   const { toast } = useToast();
+  const router = useRouter();
 
   useEffect(() => {
+    if (state?.success) {
+      router.push('/');
+    }
     if (state?.message) {
       toast({
         title: "Login Failed",
@@ -28,7 +33,7 @@ export function LoginForm() {
         variant: "destructive",
       });
     }
-  }, [state, toast]);
+  }, [state, toast, router]);
 
   return (
     <form action={formAction} className="space-y-4">

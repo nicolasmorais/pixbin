@@ -1,6 +1,5 @@
 'use server';
 
-import { redirect } from 'next/navigation';
 import { cookies } from 'next/headers';
 import { AUTH_COOKIE_NAME } from '@/lib/constants';
 
@@ -15,10 +14,11 @@ export async function login(prevState: any, formData: FormData) {
       maxAge: 60 * 60 * 24 * 7, // 1 week
       path: '/',
     });
-    return redirect('/');
+    return { success: true, message: null };
   }
 
   return {
+    success: false,
     message: 'Invalid password.',
   };
 }
