@@ -1,16 +1,8 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
-import { redirect } from 'next/navigation';
-import { cookies } from 'next/headers';
 import { put } from '@vercel/blob';
-import { AUTH_COOKIE_NAME } from '@/lib/constants';
 import type { PutBlobResult } from '@vercel/blob';
-
-export async function logout() {
-  cookies().delete(AUTH_COOKIE_NAME);
-  redirect('/login');
-}
 
 const ACCEPTED_IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/gif'];
 const MAX_FILE_SIZE_MB = 10;

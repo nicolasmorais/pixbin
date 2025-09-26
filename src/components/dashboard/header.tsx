@@ -1,6 +1,3 @@
-import { logout } from '@/app/actions';
-import { Button } from '@/components/ui/button';
-
 export function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -8,11 +5,6 @@ export function Header() {
             <div className="flex-1">
                 <h1 className="text-2xl font-bold font-headline">Pixbin</h1>
             </div>
-            <form action={logout}>
-                <Button type="submit" variant="ghost" className="hover:bg-secondary">
-                    Logout
-                </Button>
-            </form>
         </div>
     </header>
   );
