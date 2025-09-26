@@ -12,7 +12,7 @@ function SubmitButton() {
   const { pending } = useFormStatus();
   return (
     <Button type="submit" aria-disabled={pending} className="w-full btn-main transition-colors duration-300">
-      {pending ? 'Authenticating...' : 'Enter'}
+      {pending ? 'Autenticando...' : 'Entrar'}
     </Button>
   );
 }
@@ -28,7 +28,7 @@ export function LoginForm() {
     }
     if (state?.message) {
       toast({
-        title: "Login Failed",
+        title: "Falha no Login",
         description: state.message,
         variant: "destructive",
       });
@@ -40,9 +40,9 @@ export function LoginForm() {
       <Input
         type="password"
         name="password"
-        placeholder="Password"
+        placeholder="Senha"
         required
-        className="bg-background border-foreground text-foreground text-center"
+        className="bg-background border-foreground/30 text-foreground text-center"
       />
       <SubmitButton />
     </form>

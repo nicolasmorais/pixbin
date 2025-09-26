@@ -11,7 +11,7 @@ export async function login(prevState: any, formData: FormData) {
     cookies().set(AUTH_COOKIE_NAME, 'true', {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
-      maxAge: 60 * 60 * 24 * 7, // 1 week
+      maxAge: 60 * 60 * 24 * 7, // 1 semana
       path: '/',
     });
     return { success: true, message: null };
@@ -19,6 +19,6 @@ export async function login(prevState: any, formData: FormData) {
 
   return {
     success: false,
-    message: 'Invalid password.',
+    message: 'Senha inválida.',
   };
 }

@@ -23,26 +23,26 @@ export function ImageList({ blobs }: ImageListProps) {
   const handleCopy = (url: string) => {
     navigator.clipboard.writeText(url);
     toast({
-      title: 'Copied!',
-      description: 'Image link copied to clipboard.',
+      title: 'Copiado!',
+      description: 'Link da imagem copiado para a área de transferência.',
     });
   };
   
   if (blobs.length === 0) {
     return (
       <div className="text-center py-16">
-        <h2 className="text-2xl font-semibold mb-2">No images yet</h2>
-        <p className="text-muted-foreground">Start by uploading your first image.</p>
+        <h2 className="text-2xl font-semibold mb-2">Nenhuma imagem ainda</h2>
+        <p className="text-muted-foreground">Comece fazendo o upload da sua primeira imagem.</p>
       </div>
     )
   }
 
   return (
     <section>
-        <h2 className="text-3xl font-bold mb-6 font-headline">Uploaded Images</h2>
+        <h2 className="text-3xl font-bold mb-6 font-headline">Imagens Carregadas</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {blobs.map((blob) => (
-                <Card key={blob.pathname} className="overflow-hidden border-gray-800">
+                <Card key={blob.pathname} className="overflow-hidden">
                     <CardContent className="p-0">
                         <div className="aspect-square relative w-full">
                             <Image
@@ -71,13 +71,13 @@ export function ImageList({ blobs }: ImageListProps) {
                                 type="text"
                                 readOnly
                                 value={blob.url}
-                                className="text-xs bg-transparent border border-gray-600 rounded-l-md px-2 py-1 w-full focus:outline-none"
+                                className="text-xs bg-transparent border rounded-l-md px-2 py-1 w-full focus:outline-none"
                             />
                             <Button
                                 size="sm"
                                 variant="ghost"
                                 onClick={() => handleCopy(blob.url)}
-                                className="p-2 h-auto border border-l-0 border-gray-600 rounded-l-none rounded-r-md hover:bg-gray-700"
+                                className="p-2 h-auto border border-l-0 rounded-l-none rounded-r-md hover:bg-muted"
                             >
                                 <Copy className="h-4 w-4" />
                             </Button>

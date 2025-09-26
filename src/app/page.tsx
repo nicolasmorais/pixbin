@@ -11,11 +11,9 @@ export default async function DashboardPage() {
   let blobsResult: ListBlobResult;
   try {
     blobsResult = await list({
-      // Vercel Blob API has a limit of 1000 items per request.
       limit: 1000,
     });
   } catch (error) {
-    // Gracefully handle missing BLOB_READ_WRITE_TOKEN
     blobsResult = { blobs: [], hasMore: false, cursor: '' };
   }
 
@@ -26,7 +24,7 @@ export default async function DashboardPage() {
       <Header />
       <main className="container mx-auto px-4 py-8 md:py-12">
         <UploadForm />
-        <Separator className="my-8 md:my-12 bg-gray-800" />
+        <Separator className="my-8 md:my-12" />
         <ImageList blobs={sortedBlobs} />
       </main>
     </div>

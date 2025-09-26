@@ -16,15 +16,15 @@ export async function uploadImage(prevState: any, formData: FormData): Promise<{
   const file = formData.get('image') as File;
 
   if (!file || file.size === 0) {
-    return { message: "No file selected.", error: "Please select an image to upload." };
+    return { message: "Nenhum arquivo selecionado.", error: "Por favor, selecione uma imagem para enviar." };
   }
 
   if (!ACCEPTED_IMAGE_TYPES.includes(file.type)) {
-    return { message: `Invalid file type. Only ${ACCEPTED_IMAGE_TYPES.join(', ')} are allowed.`, error: "Invalid file type." };
+    return { message: `Tipo de arquivo inválido. Apenas ${ACCEPTED_IMAGE_TYPES.join(', ')} são permitidos.`, error: "Tipo de arquivo inválido." };
   }
   
   if (file.size > MAX_FILE_SIZE_BYTES) {
-    return { message: `File is too large. Max size is ${MAX_FILE_SIZE_MB}MB.`, error: "File too large." };
+    return { message: `Arquivo muito grande. O tamanho máximo é ${MAX_FILE_SIZE_MB}MB.`, error: "Arquivo muito grande." };
   }
 
   try {
@@ -34,9 +34,9 @@ export async function uploadImage(prevState: any, formData: FormData): Promise<{
 
     revalidatePath('/');
 
-    return { message: 'Image uploaded successfully!', blob };
+    return { message: 'Imagem enviada com sucesso!', blob };
   } catch (error) {
-    console.error('Upload error:', error);
-    return { message: 'An unexpected error occurred.', error: 'Upload failed.' };
+    console.error('Erro no upload:', error);
+    return { message: 'Ocorreu um erro inesperado.', error: 'Falha no upload.' };
   }
 }
