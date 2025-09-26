@@ -1,7 +1,7 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
-import { useFormState, useFormStatus } from 'react-dom';
+import { useState, useRef, useEffect, useActionState } from 'react';
+import { useFormStatus } from 'react-dom';
 import { uploadImage } from '@/app/actions';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -19,7 +19,7 @@ function SubmitButton() {
 }
 
 export function UploadForm() {
-  const [state, formAction] = useFormState(uploadImage, null);
+  const [state, formAction] = useActionState(uploadImage, null);
   const [isDragging, setIsDragging] = useState(false);
   const [uploadedBlob, setUploadedBlob] = useState<PutBlobResult | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
