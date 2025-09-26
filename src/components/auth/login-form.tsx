@@ -1,8 +1,7 @@
 'use client';
 
-import { useActionState, useEffect } from 'react';
-import { useFormStatus } from 'react-dom';
-import { useRouter } from 'next/navigation';
+import { useEffect, useRef } from 'react';
+import { useFormState, useFormStatus } from 'react-dom';
 import { login } from '@/app/login/actions';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -18,25 +17,22 @@ function SubmitButton() {
 }
 
 export function LoginForm() {
-  const [state, formAction] = useActionState(login, { message: null, success: false });
+  const [state, formAction] = useFormState(login, { message: null });
   const { toast } = useToast();
-  const router = useRouter();
+  const formRef = useRef<HTMLFormElement>(null);
 
   useEffect(() => {
-    if (state?.success) {
-      router.push('/');
-    }
-    if (state?.message && !state.success) {
+    if (state?.message) {
       toast({
         title: "Falha no Login",
         description: state.message,
         variant: "destructive",
       });
     }
-  }, [state, toast, router]);
+  }, [state, toast]);
 
   return (
-    <form action={formAction} className="space-y-4">
+    <form action={formAction} ref={formRef} className="space-y-4">
       <Input
         type="password"
         name="password"
