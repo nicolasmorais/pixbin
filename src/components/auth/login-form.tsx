@@ -26,7 +26,7 @@ export function LoginForm() {
     if (state?.success) {
       router.push('/');
     }
-    if (state?.message) {
+    if (state?.message && !state.success) {
       toast({
         title: "Falha no Login",
         description: state.message,
