@@ -1,4 +1,4 @@
-import { list } from '@vercel/blob/server';
+import { list } from '@vercel/blob';
 import { UploadForm } from '@/components/dashboard/upload-form';
 import { ImageList } from '@/components/dashboard/image-list';
 import { Header } from '@/components/dashboard/header';

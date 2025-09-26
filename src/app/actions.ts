@@ -3,7 +3,7 @@
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { cookies } from 'next/headers';
-import { put, del } from '@vercel/blob/server';
+import { put } from '@vercel/blob';
 import { AUTH_COOKIE_NAME } from '@/lib/constants';
 import type { PutBlobResult } from '@vercel/blob';
 
