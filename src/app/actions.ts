@@ -1,5 +1,6 @@
 'use server';
 
+import 'server-only';
 import { revalidatePath } from 'next/cache';
 import { put } from '@vercel/blob';
 import type { PutBlobResult } from '@vercel/blob';

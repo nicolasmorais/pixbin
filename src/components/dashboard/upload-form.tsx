@@ -100,7 +100,7 @@ export function UploadForm() {
                         <div className="flex text-sm text-gray-500">
                             <label
                                 htmlFor="image"
-                                className="relative cursor-pointer rounded-md font-medium text-primary-foreground underline-offset-4 hover:underline"
+                                className="relative cursor-pointer rounded-md font-medium text-primary underline-offset-4 hover:underline"
                             >
                                 <span>Click to upload</span>
                                 <input id="image" name="image" type="file" className="sr-only" ref={fileInputRef} accept="image/png, image/jpeg, image/gif" />
