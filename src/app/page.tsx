@@ -1,4 +1,5 @@
 import { list } from '@vercel/blob';
+import type { ListBlobResult } from '@vercel/blob';
 import { UploadForm } from '@/components/dashboard/upload-form';
 import { ImageList } from '@/components/dashboard/image-list';
 import { Header } from '@/components/dashboard/header';
@@ -7,12 +8,18 @@ import { Separator } from '@/components/ui/separator';
 export const runtime = 'edge';
 
 export default async function DashboardPage() {
-  const { blobs } = await list({
-    // Vercel Blob API has a limit of 1000 items per request.
-    limit: 1000,
-  });
+  let blobsResult: ListBlobResult;
+  try {
+    blobsResult = await list({
+      // Vercel Blob API has a limit of 1000 items per request.
+      limit: 1000,
+    });
+  } catch (error) {
+    console.error("Could not fetch blobs, is BLOB_READ_WRITE_TOKEN configured?");
+    blobsResult = { blobs: [], hasMore: false, cursor: '' };
+  }
 
-  const sortedBlobs = blobs.sort((a, b) => new Date(b.uploadedAt).getTime() - new Date(a.uploadedAt).getTime());
+  const sortedBlobs = blobsResult.blobs.sort((a, b) => new Date(b.uploadedAt).getTime() - new Date(a.uploadedAt).getTime());
 
   return (
     <div className="min-h-screen w-full">
