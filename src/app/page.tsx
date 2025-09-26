@@ -15,7 +15,7 @@ export default async function DashboardPage() {
       limit: 1000,
     });
   } catch (error) {
-    console.error("Could not fetch blobs, is BLOB_READ_WRITE_TOKEN configured?");
+    // Gracefully handle missing BLOB_READ_WRITE_TOKEN
     blobsResult = { blobs: [], hasMore: false, cursor: '' };
   }
 
