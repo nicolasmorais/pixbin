@@ -1,7 +1,7 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
-import { put } from '@vercel/blob';
+import { put, del } from '@vercel/blob';
 import type { PutBlobResult } from '@vercel/blob';
 
 const ACCEPTED_IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/gif'];
@@ -38,5 +38,20 @@ export async function uploadImage(prevState: any, formData: FormData): Promise<{
   } catch (error) {
     console.error('Erro no upload:', error);
     return { message: 'Ocorreu um erro inesperado.', error: 'Falha no upload.' };
+  }
+}
+
+
+export async function deleteImage(url: string): Promise<{
+  message: string;
+  error?: string;
+}> {
+  try {
+    await del(url);
+    revalidatePath('/');
+    return { message: 'Imagem excluída com sucesso!' };
+  } catch (error) {
+    console.error('Erro ao excluir:', error);
+    return { message: 'Ocorreu um erro ao excluir a imagem.', error: 'Falha na exclusão.' };
   }
 }
